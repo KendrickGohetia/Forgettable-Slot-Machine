@@ -84,9 +84,17 @@ void Level1Scene::update()
 	m_pUpButtonCred->setMousePosition(m_mousePosition);
 	m_pUpButtonCred->ButtonClick();
 	m_pDownButton->setMousePosition(m_mousePosition);
-	m_pDownButton->ButtonClick();
 	m_pDownButtonCred->setMousePosition(m_mousePosition);
-	m_pDownButtonCred->ButtonClick();
+
+	// Bet button down is disabled if bet amount = 0
+	//if ((m_pUpButton->getBet() - (m_pDownButton->getBet() + 1) >= 0) && m_pDownButton->getMouseButtonClicked()) {
+		m_pDownButton->ButtonClick();
+	//}
+
+	// Credit button down is disabled if credit amount = 0
+	//if ((m_pUpButtonCred->getCredit() - (m_pDownButtonCred->getCredit() + 1) >= 0) && m_pDownButtonCred->getMouseButtonClicked()) {
+		m_pDownButtonCred->ButtonClick();
+	//}
 
 	pBet = m_pUpButton->getBet() - m_pDownButton->getBet();
 
@@ -99,34 +107,6 @@ void Level1Scene::update()
 	if (pCredit < 0) {
 		pCredit = 0;
 	}
-
-	//if (m_pUpButton->ButtonClick()) {
-	//	incBet();
-	//	//std::cout << "Bet: " << getBet() << std::endl;
-	//}
-
-	//if (m_pDownButton->ButtonClick() && getBet() != 0) {
-	//	decBet();
-	//	//std::cout << "Bet: " << getBet() << std::endl;
-	//
-
-	if (pBet > pCredit) {
-		m_pSystemMsg = new Label("You cannot bet more than your credit value!", "Consolas", 15, red,
-			glm::vec2(Config::SCREEN_WIDTH * 0.53f, Config::SCREEN_HEIGHT * 0.60f));
-
-		m_pBetAmountLabel = new Label(std::to_string(pBet), "Consolas", 25, red,
-			glm::vec2(Config::SCREEN_WIDTH * 0.30f, Config::SCREEN_HEIGHT * 0.87));
-	}
-	else if (pBet <= pCredit) {
-		m_pSystemMsg = new Label(" ", "Consolas", 20, red,
-			glm::vec2(Config::SCREEN_WIDTH * 0.53f, Config::SCREEN_HEIGHT * 0.80f));
-
-		m_pBetAmountLabel = new Label(std::to_string(pBet), "Consolas", 25, blue,
-			glm::vec2(Config::SCREEN_WIDTH * 0.30f, Config::SCREEN_HEIGHT * 0.87));
-	}
-
-	m_pCredAmountLabel = new Label(std::to_string(pCredit), "Consolas", 25, blue,
-		glm::vec2(Config::SCREEN_WIDTH * 0.30f, Config::SCREEN_HEIGHT * 0.13f));
 
 	if (m_pSpinButton->ButtonClick()) {
 
@@ -240,15 +220,24 @@ void Level1Scene::update()
 			break;
 		}
 	}
-	
-	//m_pBetLabel->update();
-	//m_pPlane->setVelocity(m_pPlane->getVelocity() * 0.97f);
-	// plane moving with mouse motion
-	//m_pPlane->setPosition(glm::vec2(m_mousePosition.x, m_pPlane->getPosition().y));
 
-	//CollisionManager::AABBCheck(m_pPlane, m_pIsland);
+	if (pBet > pCredit) {
+		m_pSystemMsg = new Label("You cannot bet more than your credit value!", "Consolas", 15, red,
+			glm::vec2(Config::SCREEN_WIDTH * 0.53f, Config::SCREEN_HEIGHT * 0.60f));
 
-	//CollisionManager::squaredRadiusCheck(m_SMFrame, m_pIsland);
+		m_pBetAmountLabel = new Label(std::to_string(pBet), "Consolas", 25, red,
+			glm::vec2(Config::SCREEN_WIDTH * 0.30f, Config::SCREEN_HEIGHT * 0.87));
+	}
+	else if (pBet <= pCredit) {
+		m_pSystemMsg = new Label(" ", "Consolas", 20, red,
+			glm::vec2(Config::SCREEN_WIDTH * 0.53f, Config::SCREEN_HEIGHT * 0.80f));
+
+		m_pBetAmountLabel = new Label(std::to_string(pBet), "Consolas", 25, blue,
+			glm::vec2(Config::SCREEN_WIDTH * 0.30f, Config::SCREEN_HEIGHT * 0.87));
+	}
+
+	m_pCredAmountLabel = new Label(std::to_string(pCredit), "Consolas", 25, blue,
+		glm::vec2(Config::SCREEN_WIDTH * 0.30f, Config::SCREEN_HEIGHT * 0.13f));
 
 }
 

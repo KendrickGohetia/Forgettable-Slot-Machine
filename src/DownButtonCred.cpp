@@ -22,7 +22,7 @@ bool DownButtonCred::ButtonClick()
 		if (!m_isClicked)
 		{
 			decCredit();
-			std::cout << "Credit: " << getCredit() << std::endl;
+			//std::cout << "Credit: " << getCredit() << std::endl;
 			//Game::Instance()->changeSceneState(LEVEL1_SCENE);
 			m_isClicked = true;
 		}

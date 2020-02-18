@@ -46,6 +46,11 @@ void Button::setMouseButtonClicked(bool clicked)
 	m_mouseButtonClicked = clicked;
 }
 
+bool Button::getMouseButtonClicked()
+{
+	return m_mouseButtonClicked;
+}
+
 
 bool Button::m_mouseOver()
 {
