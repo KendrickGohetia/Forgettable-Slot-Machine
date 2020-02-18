@@ -22,9 +22,17 @@ bool SpinButton::ButtonClick()
 		if (!m_isClicked)
 		{
 			randNums();
-			std::cout << "R1: " << getR1() << std::endl;
-			std::cout << "R2: " << getR2() << std::endl;
-			std::cout << "R3: " << getR3() << std::endl;
+
+			r1 = getR1();
+			r2 = getR2();
+			r3 = getR3();
+
+			if (r1 == r2 || r1 == r3 || r2 == r1 || r2 == r3 || r3 == r1 || r3 == r2) {
+				wonCreds(2);
+			}
+			else if ((r1 == r2 && r1 == r3) || (r2 == r1 && r2 == r3) || (r3 == r1 && r3 == r2)) {
+				wonCreds(3);
+			}
 
 			m_isClicked = true;
 		}

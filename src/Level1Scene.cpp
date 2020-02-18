@@ -102,7 +102,7 @@ void Level1Scene::update()
 		pBet = 0;
 	}
 
-	pCredit = m_pUpButtonCred->getCredit() - m_pDownButtonCred->getCredit();
+	pCredit = (m_pUpButtonCred->getCredit() - m_pDownButtonCred->getCredit()) + totCredsWon;
 
 	if (pCredit < 0) {
 		pCredit = 0;
@@ -219,6 +219,7 @@ void Level1Scene::update()
 			m_pLemon3->draw();
 			break;
 		}
+
 	}
 
 	if (pBet > pCredit) {
